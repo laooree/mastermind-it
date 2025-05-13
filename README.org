@@ -9,9 +9,9 @@ then tries to guess it using [[https://en.wikipedia.org/wiki/Mastermind_(board_g
 
 * How do I try it?
 
-Simply run =main.jl= script. Type a numeric sequence (e.g. =179=), and wait for
+Simply run =main.py=. Type a numeric sequence (e.g. =179=), and wait for
 the program to guess it. The length is arbitrary, but 4-digit or longer
-sequences make the program really slow.
+sequences make the program slow.
 
 * How does it work?
 
@@ -30,31 +30,3 @@ guesses are left on the set of possible guesses.
 
 This program works by picking the guesses that maximize the expected information
 value.
-
-* Possible improvements
-
-This section highlights the issues of the code and possible solutions. Keep in
-mind that I'm a beginner with =Julia= (and I'm not a developer). This
-program is mainly a way for me to learn this language.
-
-** It's slow
-
-If you try to play with 4 or more digits, you'll realize it. I see three
-improvements that could be implemented:
-1. Rewrite part of the code keeping into account [[https://docs.julialang.org/en/v1/manual/performance-tips/#Avoid-global-variables][these tips]];
-2. Choose the first guess in a smarter way;
-3. Use multi-threading.
-
-1 and 2 and will probably make 4-digit solutions playable. Regarding 2, it is
-probably not necessary to go through all the possible solutions for the first
-guess. What actually matters at that moment is not which digits you pick, but
-how many of them are different. For example, the expected information value on
-the first guess is the same for =1234= and =4567=, but it's different from
-=1122=, which in turn is different from =1112= and =1111=. Only guesses belonging to different patterns have different expected information, and for a 4-digits game the patterns are:
-- =XXXX=
-- =XXXY=
-- =XXYY=
-- =XXYZ=
-- =XYZW=
-The first guess could probably be pre-determined by the number of digits of the
-solution (which is known by the program!).
